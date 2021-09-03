@@ -5,11 +5,11 @@ import java.util.List;
 
 public class VendingMachine {
     private VendingMachineHoldingAmount vendingMachineHoldingAmount;
-    private List<Drink> drinks;
+    private Drinks drinks;
 
     public VendingMachine() {
         this.vendingMachineHoldingAmount = new VendingMachineHoldingAmount();
-        this.drinks = new ArrayList<>();
+        this.drinks = new Drinks();
     }
 
     public void chargeCoin (Coins coin, int chargeCoinCount) {
@@ -21,11 +21,11 @@ public class VendingMachine {
     }
 
     public void addDrink(Drink drink) {
-        drinks.add(drink);
+        drinks.addDrink(drink);
     }
 
     public int countDrinks() {
-        return drinks.size();
+        return drinks.countDrinks();
     }
 
     @Override
