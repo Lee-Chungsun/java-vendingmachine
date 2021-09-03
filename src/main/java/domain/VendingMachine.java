@@ -1,19 +1,18 @@
 package domain;
 
 public class VendingMachine {
-    private static final int MINIMUM_HOLDING_AMOUNT = 0;
-    private int holdingAmount;
+    private VendingMachineHoldingAmount vendingMachineHoldingAmount;
 
     public VendingMachine() {
-        this.holdingAmount = MINIMUM_HOLDING_AMOUNT;
+        this.vendingMachineHoldingAmount = new VendingMachineHoldingAmount();
     }
 
-    public void chargeHoldingAmount(int holdingAmount) {
-        this.holdingAmount = holdingAmount;
+    public void chargeCoin (Coins coin, int chargeCoinCount) {
+        this.vendingMachineHoldingAmount.chargeCoin(coin, chargeCoinCount);
     }
 
     public boolean isRemainingAmount(int expectedAmount) {
-        return this.holdingAmount == expectedAmount;
+        return this.vendingMachineHoldingAmount.isRemainingAmount(expectedAmount);
     }
 
     @Override

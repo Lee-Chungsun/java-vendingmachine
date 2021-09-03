@@ -26,7 +26,7 @@ public class VendingMachineHoldingAmountTest {
     void 자판기_보유_코인_증가() {
         VendingMachineHoldingAmount vendingMachineHoldingAmount = new VendingMachineHoldingAmount();
 
-        vendingMachineHoldingAmount.chargeHoldingAmount(Coins.FIVE_HUNDRED_COIN, 5);
+        vendingMachineHoldingAmount.chargeCoin(Coins.FIVE_HUNDRED_COIN, 5);
 
         assertThat(vendingMachineHoldingAmount.countThisCoin(Coins.FIVE_HUNDRED_COIN)).isEqualTo(5);
     }
