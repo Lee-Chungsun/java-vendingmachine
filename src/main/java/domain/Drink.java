@@ -9,8 +9,8 @@ public class Drink {
     private static final int DRINK_AMOUNT_UNIT = 10;
 
     private final String name;
-    private final int count;
     private final int amount;
+    private int count;
 
     public Drink(String name, int count, int amount) {
         validate(amount);
@@ -27,6 +27,25 @@ public class Drink {
         if (amount % DRINK_AMOUNT_UNIT != 0) {
             throw new IllegalArgumentException(String.format(DRINK_AMOUNT_UNIT_EXCEPTION, DRINK_AMOUNT_UNIT));
         }
+    }
+
+    public int serveDrink(int userPay) {
+        if (count == 0) {
+            throw new IllegalArgumentException("해당 상품은 품절입니다.");
+        }
+        if (userPay < amount) {
+            throw new IllegalArgumentException("금액이 부족합니다.");
+        }
+        this.count -= 1;
+        return userPay - amount;
+    }
+
+    public int countOfDrink() {
+        return this.count;
+    }
+
+    public boolean isExistDrink(String orderDrink) {
+        return this.name.equals(orderDrink);
     }
 
     @Override

@@ -1,8 +1,5 @@
 package domain;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class VendingMachine {
     private VendingMachineHoldingAmount vendingMachineHoldingAmount;
     private Drinks drinks;
@@ -26,6 +23,14 @@ public class VendingMachine {
 
     public int countDrinks() {
         return drinks.countDrinks();
+    }
+
+    public int orderDrink(int userPay, String orderDrink) {
+        return drinks.orderDrink(userPay, orderDrink);
+    }
+
+    public int getDrinkCount(String orderDrink) {
+        return drinks.countOfOrderDrink(orderDrink);
     }
 
     @Override
