@@ -5,14 +5,13 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class VendingMachineHoldingAmount {
-    private Integer sumHoldingAmount;
+    public static final int MINIMUM_COIN_COUNT = 0;
     private Map<Coins, Integer> coins;
 
     public VendingMachineHoldingAmount() {
-        this.sumHoldingAmount = Integer.valueOf(0);
         this.coins = new HashMap<>();
         Arrays.stream(Coins.values()).forEach(
-                coin -> this.coins.put(coin, Integer.valueOf(0))
+                coin -> this.coins.put(coin, Integer.valueOf(MINIMUM_COIN_COUNT))
         );
     }
 
