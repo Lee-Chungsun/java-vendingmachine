@@ -41,7 +41,7 @@ public class Drinks {
 
     public boolean isExistDrink() {
         return drinks.stream()
-                .noneMatch(drink -> drink.countOfDrink() == 0) && drinks.size() != 0;
+                .anyMatch(drink -> drink.countOfDrink() != 0) && drinks.size() != 0;
     }
 
     public boolean isExistCheapDrinkThanPay(int pay) {
