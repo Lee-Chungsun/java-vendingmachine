@@ -1,7 +1,7 @@
 package domain;
 
 import java.util.Arrays;
-import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Map;
 
 public class VendingMachineHoldingAmount {
@@ -9,7 +9,7 @@ public class VendingMachineHoldingAmount {
     private Map<Coins, Integer> coins;
 
     public VendingMachineHoldingAmount() {
-        this.coins = new HashMap<>();
+        this.coins = new LinkedHashMap<>();
         Arrays.stream(Coins.values()).forEach(
                 coin -> this.coins.put(coin, Integer.valueOf(MINIMUM_COIN_COUNT))
         );
@@ -45,5 +45,15 @@ public class VendingMachineHoldingAmount {
             sum = Integer.sum(sum, coin.calculateAmount(this.coins.get(coin)));
         }
         return sum == expectedAmount;
+    }
+
+    public Map<String, Integer> returnChange(int pay) {
+        Map<String, Integer> returnChange = new LinkedHashMap<>();
+        for (Coins coin : this.coins.keySet()) {
+            int countOfCoin = Integer.min(coin.calculateMaxCountOfCoin(pay), this.coins.get(coin));
+            returnChange.put(coin.name, Integer.min(countOfCoin, this.coins.get(coin)));
+            pay = pay - coin.calculateAmount(countOfCoin);
+        }
+        return returnChange;
     }
 }

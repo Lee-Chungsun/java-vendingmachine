@@ -38,4 +38,14 @@ public class Drinks {
                 .max()
                 .orElseThrow(() -> new IllegalArgumentException(NOT_FOUNDED_DRINK_EXCEPTION));
     }
+
+    public boolean isExistDrink() {
+        return drinks.stream()
+                .noneMatch(drink -> drink.countOfDrink() == 0) && drinks.size() != 0;
+    }
+
+    public boolean isExistCheapDrinkThanPay(int pay) {
+        return drinks.stream()
+                .anyMatch(drink -> drink.isCheapDrinkThanPay(pay));
+    }
 }

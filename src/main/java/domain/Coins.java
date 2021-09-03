@@ -1,14 +1,16 @@
 package domain;
 
 public enum Coins {
-    FIVE_HUNDRED_COIN(500),
-    ONE_HUNDRED_COIN(100),
-    ONE_TEN_COIN(10);
+    FIVE_HUNDRED_COIN(500, "500원"),
+    ONE_HUNDRED_COIN(100, "100원"),
+    ONE_TEN_COIN(10, "10원");
 
     Integer amount;
+    String name;
 
-    Coins(Integer amount){
+    Coins(Integer amount, String name){
         this.amount = amount;
+        this.name = name;
     }
 
     public int calculateRemainingAmount(int holdingAmount, int coinCount) {

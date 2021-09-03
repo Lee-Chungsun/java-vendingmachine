@@ -1,5 +1,7 @@
 package domain;
 
+import java.util.Map;
+
 public class VendingMachine {
     private VendingMachineHoldingAmount vendingMachineHoldingAmount;
     private Drinks drinks;
@@ -21,6 +23,14 @@ public class VendingMachine {
         drinks.addDrink(drink);
     }
 
+    public boolean isExistDrink() {
+        return drinks.isExistDrink();
+    }
+
+    public boolean isExistCheapDrinkThanPay(int pay) {
+        return drinks.isExistCheapDrinkThanPay(pay);
+    }
+
     public int countDrinks() {
         return drinks.countDrinks();
     }
@@ -31,6 +41,10 @@ public class VendingMachine {
 
     public int getDrinkCount(String orderDrink) {
         return drinks.countOfOrderDrink(orderDrink);
+    }
+
+    public Map<String, Integer> returnChange(int pay) {
+        return vendingMachineHoldingAmount.returnChange(pay);
     }
 
     @Override

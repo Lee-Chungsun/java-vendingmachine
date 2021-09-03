@@ -4,6 +4,8 @@ import domain.VendingMachine;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 
 import static org.assertj.core.api.Assertions.*;
 
@@ -68,6 +70,27 @@ public class VendingMachineServiceTest {
 
         int remainingPay = vendingMachine.orderDrink(3000, "콜라");
         assertThat(remainingPay).isEqualTo(1500);
+    }
 
+    @ParameterizedTest
+    @CsvSource(value = {"[콜라,20,1000];[사이다,10,1000]:true", "[콜라,0,1000];[사이다,0,1000]:false"}, delimiter = ':')
+    @DisplayName("구매할 수 있는 상품이 있는지 확인한다.")
+    void 자판기_음료_존재_여부(String inputDrinkInforms, boolean expectedIsBuy) {
+        VendingMachine vendingMachine = new VendingMachine();
+        drinkService.createDrinks(vendingMachine, inputDrinkInforms);
+
+        assertThat(vendingMachineService.isCanBuyDrink(vendingMachine, 3000))
+                .isEqualTo(expectedIsBuy);
+    }
+
+    @ParameterizedTest
+    @CsvSource(value = {"[콜라,20,5000];[사이다,10,1000]:true", "[콜라,2,5000];[사이다,1,6000]:false"}, delimiter = ':')
+    @DisplayName("구매할 수 있는 상품이 있는지 확인한다.")
+    void 자판기_음료_가격_여부(String inputDrinkInforms, boolean expectedIsBuy) {
+        VendingMachine vendingMachine = new VendingMachine();
+        drinkService.createDrinks(vendingMachine, inputDrinkInforms);
+
+        assertThat(vendingMachineService.isCanBuyDrink(vendingMachine, 3000))
+                .isEqualTo(expectedIsBuy);
     }
 }

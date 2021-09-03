@@ -48,6 +48,10 @@ public class Drink {
         return this.name.equals(orderDrink);
     }
 
+    public boolean isCheapDrinkThanPay(int pay) {
+        return this.amount <= pay;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

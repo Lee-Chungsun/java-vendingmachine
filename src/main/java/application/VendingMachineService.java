@@ -3,6 +3,8 @@ package application;
 import domain.Coins;
 import domain.VendingMachine;
 
+import java.util.Map;
+
 public class VendingMachineService {
     public void chargeHoldingAmount(VendingMachine vendingMachine, int chargeHoldingAmount) {
         if (chargeHoldingAmount % 10 != 0) {
@@ -20,5 +22,22 @@ public class VendingMachineService {
             chargeHoldingAmount = coin.calculateRemainingAmount(chargeHoldingAmount, coinCount);
         }
         return chargeHoldingAmount;
+    }
+
+    public boolean isCanBuyDrink(VendingMachine vendingMachine, int pay) {
+        if (!vendingMachine.isExistDrink()) {
+            return false;
+        }
+        if (!vendingMachine.isExistCheapDrinkThanPay(pay)) {
+            return false;
+        }
+        return true;
+    }
+
+    public Map<String, Integer> returnChange(VendingMachine vendingMachine, int pay) {
+        if(pay == 0) {
+            throw new IllegalArgumentException("받을 잔돈이 없습니다.");
+        }
+        return vendingMachine.returnChange(pay);
     }
 }
