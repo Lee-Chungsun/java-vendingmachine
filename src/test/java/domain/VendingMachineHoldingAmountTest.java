@@ -51,11 +51,12 @@ public class VendingMachineHoldingAmountTest {
         VendingMachineHoldingAmount vendingMachineHoldingAmount = new VendingMachineHoldingAmount();
 
         vendingMachineHoldingAmount.chargeCoin(Coins.FIVE_HUNDRED_COIN, 0);
-        vendingMachineHoldingAmount.chargeCoin(Coins.ONE_HUNDRED_COIN, 4);
+        vendingMachineHoldingAmount.chargeCoin(Coins.ONE_HUNDRED_COIN, 5);
+        vendingMachineHoldingAmount.chargeCoin(Coins.ONE_TEN_COIN, 5);
 
-        Map<String, Integer> expected = vendingMachineHoldingAmount.returnChange(550);
+        Map<String, Integer> expected = vendingMachineHoldingAmount.returnChange(450);
 
-        assertThat(expected.get("500원")).isEqualTo(0);
         assertThat(expected.get("100원")).isEqualTo(4);
+        assertThat(expected.get("10원")).isEqualTo(5);
     }
 }
