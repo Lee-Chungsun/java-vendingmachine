@@ -8,23 +8,17 @@ import java.util.Scanner;
 
 public class InputView {
 
-    private static Scanner scan;
-
     public static VendingMachine turnOnVendingMachine() {
         VendingMachine vendingMachine = new VendingMachine();
         VendingMachineService vendingMachineService = new VendingMachineService();
 
         try{
-            scan = new Scanner(System.in);
-
             System.out.println("자판기가 보유하고 있는 금액을 입력해 주세요.");
-            Integer holdingAmount = scan.nextInt();
+            Integer holdingAmount = new Scanner(System.in).nextInt();
 
             vendingMachineService.chargeHoldingAmount(vendingMachine, holdingAmount);
         } catch (Exception e) {
             e.printStackTrace();
-        } finally {
-            scan.nextLine();
         }
 
         return vendingMachine;
@@ -35,7 +29,7 @@ public class InputView {
 
         try{
             System.out.println("상품명과 수량, 금액을 입력해 주세요.");
-            String chargeDrinks = scan.nextLine();
+            String chargeDrinks = new Scanner(System.in).nextLine();
 
             drinkService.createDrinks(vendingMachine, chargeDrinks);
         } catch (Exception e) {
@@ -48,6 +42,8 @@ public class InputView {
         Integer pay = null;
 
         try {
+            Scanner scan = new Scanner(System.in);
+
             System.out.println("투입 금액을 입력해 주세요.");
             pay = scan.nextInt();
             scan.nextLine();
@@ -59,8 +55,8 @@ public class InputView {
 
                 pay = vendingMachine.orderDrink(pay, orderDrink);
             }
-        } finally {
-            if (scan != null) scan.close();
+        } catch (Exception e) {
+            e.printStackTrace();
         }
 
         return pay;
