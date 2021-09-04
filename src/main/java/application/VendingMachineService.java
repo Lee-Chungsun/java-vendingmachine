@@ -35,9 +35,6 @@ public class VendingMachineService {
     }
 
     public Map<String, Integer> returnChange(VendingMachine vendingMachine, int pay) {
-        if(pay == 0) {
-            throw new IllegalArgumentException("받을 잔돈이 없습니다.");
-        }
         return vendingMachine.returnChange(pay);
     }
 }
