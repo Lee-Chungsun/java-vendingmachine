@@ -14,7 +14,7 @@ public class VendingMachineHoldingAmountTest {
     void 자판기_보유_금액_생성() {
         VendingMachineHoldingAmount vendingMachineHoldingAmount = new VendingMachineHoldingAmount();
 
-        assertThat(vendingMachineHoldingAmount.countKindsOfCoin()).isEqualTo(3);
+        assertThat(vendingMachineHoldingAmount.countKindsOfCoin()).isEqualTo(4);
     }
 
     @Test
