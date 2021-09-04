@@ -9,40 +9,59 @@ import java.util.Scanner;
 
 public class InputView {
 
-    private static Scanner s = new Scanner(System.in);
+    private static Scanner scan;
 
     public static VendingMachine turnOnVendingMachine() {
         VendingMachine vendingMachine = new VendingMachine();
         VendingMachineService vendingMachineService = new VendingMachineService();
 
-        System.out.println("자판기가 보유하고 있는 금액을 입력해 주세요.");
-        Integer holdingAmount = s.nextInt();
+        try{
+            scan = new Scanner(System.in);
 
-        vendingMachineService.chargeHoldingAmount(vendingMachine, holdingAmount);
+            System.out.println("자판기가 보유하고 있는 금액을 입력해 주세요.");
+            Integer holdingAmount = scan.nextInt();
+
+            vendingMachineService.chargeHoldingAmount(vendingMachine, holdingAmount);
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            scan.nextLine();
+        }
+
         return vendingMachine;
     }
 
     public static void chargeDrinks(VendingMachine vendingMachine) {
         DrinkService drinkService = new DrinkService();
 
-        System.out.println("상품명과 수량, 금액을 입력해 주세요.");
-        String chargeDrinks = Scanners.nextLine();
+        try{
+            System.out.println("상품명과 수량, 금액을 입력해 주세요.");
+            String chargeDrinks = scan.nextLine();
 
-        drinkService.createDrinks(vendingMachine, chargeDrinks);
+            drinkService.createDrinks(vendingMachine, chargeDrinks);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     public static int pushPay(VendingMachine vendingMachine) {
         VendingMachineService vendingMachineService = new VendingMachineService();
+        Integer pay = null;
 
-        System.out.println("투입 금액을 입력해 주세요.");
-        Integer pay = s.nextInt();
+        try {
+            System.out.println("투입 금액을 입력해 주세요.");
+            pay = scan.nextInt();
+            scan.nextLine();
 
-        while (vendingMachineService.isCanBuyDrink(vendingMachine, pay)) {
-            OutputView.noticeRemainingPay(pay);
-            System.out.println("구매하실 상품명을 입력해주세요.");
-            String orderDrink = Scanners.nextLine();
+            while (vendingMachineService.isCanBuyDrink(vendingMachine, pay)) {
+                OutputView.noticeRemainingPay(pay);
+                System.out.println("구매하실 상품명을 입력해주세요.");
+                String orderDrink = scan.nextLine();
 
-            pay = vendingMachine.orderDrink(pay, orderDrink);
+                pay = vendingMachine.orderDrink(pay, orderDrink);
+            }
+        } finally {
+            if (scan != null) scan.close();
         }
 
         return pay;
