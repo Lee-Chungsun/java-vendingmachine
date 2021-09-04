@@ -2,7 +2,6 @@ package ui;
 
 import application.DrinkService;
 import application.VendingMachineService;
-import com.woowahan.techcourse.utils.Scanners;
 import domain.VendingMachine;
 
 import java.util.Scanner;
